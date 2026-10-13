@@ -1,0 +1,160 @@
+{
+  "rules": {
+    ".read": false,
+    ".write": false,
+    "leciona": {
+      ".read": "auth != null && (auth.token.email === 'prof.malufc@gmail.com' || auth.token.email === 'malu.cesar@gmail.com')",
+      ".write": "auth != null && (auth.token.email === 'prof.malufc@gmail.com' || auth.token.email === 'malu.cesar@gmail.com')"
+    },
+    "relCfg": {
+      ".read": "auth != null && (auth.token.email === 'prof.malufc@gmail.com' || auth.token.email === 'malu.cesar@gmail.com')",
+      ".write": "auth != null && (auth.token.email === 'prof.malufc@gmail.com' || auth.token.email === 'malu.cesar@gmail.com')"
+    },
+    "amefricanidades_2026": {
+      "catalog": {
+        ".read": true,
+        ".write": "auth != null && auth.token.email_verified === true && (auth.token.email === 'prof.malufc@gmail.com' || auth.token.email === 'malu.cesar@gmail.com')",
+        "$mask": {
+          ".validate": "newData.hasChildren(['number','title','text','photo','authors','active','updatedAt'])",
+          "number": {
+            ".validate": "newData.isNumber() && newData.val() >= 1 && newData.val() <= 9999 && newData.val() % 1 === 0"
+          },
+          "title": {
+            ".validate": "newData.isString() && newData.val().length <= 100"
+          },
+          "text": {
+            ".validate": "newData.isString() && newData.val().length > 0 && newData.val().length <= 5000"
+          },
+          "photo": {
+            ".validate": "newData.isString() && newData.val().beginsWith('data:image/jpeg;base64,') && newData.val().length <= 400000"
+          },
+          "active": {
+            ".validate": "newData.isBoolean()"
+          },
+          "updatedAt": {
+            ".validate": "newData.isNumber()"
+          },
+          "authors": {
+            ".validate": "newData.hasChild('first')",
+            "first": {
+              ".validate": "newData.hasChildren(['id','name','className'])"
+            },
+            "second": {
+              ".validate": "newData.hasChildren(['id','name','className']) && newData.child('id').val() !== newData.parent().child('first/id').val()"
+            },
+            "$other": {
+              ".validate": false
+            }
+          },
+          "$other": {
+            ".validate": false
+          }
+        }
+      },
+      "roster": {
+        ".read": "auth != null",
+        ".write": "auth != null && auth.token.email_verified === true && (auth.token.email === 'prof.malufc@gmail.com' || auth.token.email === 'malu.cesar@gmail.com')",
+        "$student": {
+          ".validate": "newData.hasChildren(['name','className'])",
+          "name": {
+            ".validate": "newData.isString() && newData.val().length > 0 && newData.val().length <= 200"
+          },
+          "className": {
+            ".validate": "newData.val() === '1ªA' || newData.val() === '1ªB' || newData.val() === '2ªA' || newData.val() === '2ªB' || newData.val() === '3ªA' || newData.val() === '3ªB' || newData.val() === '3ªC'"
+          },
+          "$other": {
+            ".validate": false
+          }
+        }
+      },
+      "settings": {
+        ".read": true,
+        ".write": "auth != null && auth.token.email_verified === true && (auth.token.email === 'prof.malufc@gmail.com' || auth.token.email === 'malu.cesar@gmail.com')",
+        "open": {
+          ".validate": "newData.isBoolean()"
+        },
+        "updatedAt": {
+          ".validate": "newData.isNumber()"
+        },
+        "$other": {
+          ".validate": false
+        }
+      },
+      "ballots": {
+        ".read": "auth != null",
+        "$student": {
+          ".write": "auth != null && !data.exists() && newData.exists() && root.child('amefricanidades_2026').child('settings/open').val() === true && (root.child('amefricanidades_2026').child('roster').child($student).exists() || root.child('amefricanidades_2026').child('staff').child($student).exists())",
+          ".validate": "newData.hasChildren(['first','second','third','at']) && newData.child('first').isString() && root.child('amefricanidades_2026').child('catalog').child(newData.child('first').val()).child('active').val() === true && newData.child('second').isString() && root.child('amefricanidades_2026').child('catalog').child(newData.child('second').val()).child('active').val() === true && newData.child('third').isString() && root.child('amefricanidades_2026').child('catalog').child(newData.child('third').val()).child('active').val() === true && newData.child('first').val() !== newData.child('second').val() && newData.child('first').val() !== newData.child('third').val() && newData.child('second').val() !== newData.child('third').val()",
+          "first": {
+            ".validate": "newData.isString()"
+          },
+          "second": {
+            ".validate": "newData.isString()"
+          },
+          "third": {
+            ".validate": "newData.isString()"
+          },
+          "at": {
+            ".validate": "newData.isNumber() && newData.val() <= now && newData.val() >= now - 60000"
+          },
+          "$other": {
+            ".validate": false
+          }
+        }
+      },
+      "$other": {
+        ".read": false,
+        ".write": false
+      },
+      "staff": {
+        ".read": "auth != null",
+        "$person": {
+          ".write": "auth != null && !data.exists() && newData.exists()",
+          ".validate": "newData.hasChildren(['name','className','at'])",
+          "name": {
+            ".validate": "newData.isString() && newData.val().length >= 3 && newData.val().length <= 150"
+          },
+          "className": {
+            ".validate": "newData.val() === 'Professor/Funcionário'"
+          },
+          "at": {
+            ".validate": "newData.isNumber() && newData.val() <= now && newData.val() >= now - 60000"
+          },
+          "$other": {
+            ".validate": false
+          }
+        }
+      },
+      "reviews": {
+        ".read": "auth != null",
+        "$mask": {
+          "$person": {
+            ".write": "auth != null && newData.exists() && root.child('amefricanidades_2026').child('settings/open').val() === true && root.child('amefricanidades_2026').child('catalog').child($mask).child('active').val() === true && root.child('amefricanidades_2026').child('staff').child($person).exists() && (!data.exists() || data.child('uid').val() === auth.uid)",
+            ".validate": "newData.hasChildren(['theme','creativity','presentation','comment','uid','at'])",
+            "theme": {
+              ".validate": "newData.isNumber() && newData.val() >= 1 && newData.val() <= 5 && newData.val() % 1 === 0"
+            },
+            "creativity": {
+              ".validate": "newData.isNumber() && newData.val() >= 1 && newData.val() <= 5 && newData.val() % 1 === 0"
+            },
+            "presentation": {
+              ".validate": "newData.isNumber() && newData.val() >= 1 && newData.val() <= 5 && newData.val() % 1 === 0"
+            },
+            "comment": {
+              ".validate": "newData.isString() && newData.val().length <= 1000"
+            },
+            "uid": {
+              ".validate": "newData.isString() && newData.val() === auth.uid"
+            },
+            "at": {
+              ".validate": "newData.isNumber() && newData.val() <= now && newData.val() >= now - 60000"
+            },
+            "$other": {
+              ".validate": false
+            }
+          }
+        }
+      }
+    }
+  }
+}

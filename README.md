@@ -57,3 +57,11 @@ Não existe simulação automática ou gravação local de votos usada como resu
 ## QR code preservado
 
 Por instrução da usuária, o QR code original e o cartaz continuam exatamente iguais. Seu destino permanece https://malucesarrobot.github.io/IURIS-/amefricanidades/#votar. `config.js` fixa esse endereço. Depois de ativar e verificar o novo GitHub Pages, configurar a página antiga para encaminhar ao novo site, preservando o QR impresso. Não redirecionar antes de confirmar que o novo endereço funciona.
+
+## Professores e funcionários
+
+A opção **Professor/Funcionário** aparece na identificação dos votantes. O nome é digitado livremente, e a pessoa pode escolher três máscaras com o mesmo peso dos votos dos estudantes. A participação repetida com o mesmo nome normalizado usa o mesmo cadastro. A identificação é autodeclarada e não comprova vínculo com a escola.
+
+A equipe também pode avaliar cada máscara com notas inteiras de 1 a 5 em relação com o tema, criatividade e apresentação, além de comentário opcional. As médias são exibidas em uma seção separada do ranking de votos. Cada nome tem uma avaliação por máscara; a revisão é permitida no mesmo acesso enquanto a votação estiver aberta. Outro acesso não pode sobrescrever a avaliação existente.
+
+Para ativar essa função, atualize as regras com `database.rules.integrated.json`, que preserva os ramos leciona e relCfg conforme as regras fornecidas em 13/10/2026. Se houve alterações posteriores no console, integre o fragmento atual sem substituir esses outros ramos. A atualização de código não publica regras no Firebase automaticamente.

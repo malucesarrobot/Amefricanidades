@@ -41,7 +41,8 @@
       <div class="section-title" id="identificacao"><div><p class="eyebrow">01 · IDENTIFIQUE-SE</p><h2>Antes de escolher</h2></div><span id="connection" class="status-pill">Conectando…</span></div>
       <div class="identity panel">
         <label>Turma<select id="voter-class"><option value="">Selecione sua turma</option></select></label>
-        <label>Seu nome<select id="voter-name" disabled><option value="">Selecione a turma primeiro</option></select></label>
+        <label id="student-name-field">Seu nome<select id="voter-name" disabled><option value="">Selecione a turma primeiro</option></select></label>
+        <label id="staff-name-field" hidden>Seu nome completo<input id="staff-name" maxlength="150" autocomplete="name" placeholder="Escreva seu nome"></label>
         <p id="voter-status" class="muted">Cada estudante participa uma vez, escolhendo três máscaras diferentes.</p>
       </div>
       <div class="section-title"><div><p class="eyebrow">02 · CONHEÇA AS OBRAS</p><h2>Escolha suas três máscaras</h2></div><span id="mask-count" class="muted"></span></div>
@@ -52,9 +53,12 @@
     <section id="ranking" class="view" hidden>
       <div class="section-title"><div><p class="eyebrow">A ESCOLHA DA ESCOLA</p><h1 class="page-title">Resultados ao vivo</h1></div><button id="project" class="secondary">Projetar</button></div>
       <p class="intro">Cada escolha vale um voto. As máscaras sobem no ranking conforme recebem votos.</p>
-      <div class="stats"><div><strong id="total-voters">—</strong><span>estudantes votaram</span></div><div><strong id="total-choices">—</strong><span>escolhas registradas</span></div><div><strong id="total-masks">—</strong><span>máscaras participantes</span></div></div>
+      <div class="stats"><div><strong id="total-voters">—</strong><span>pessoas votaram</span></div><div><strong id="total-choices">—</strong><span>escolhas registradas</span></div><div><strong id="total-masks">—</strong><span>máscaras participantes</span></div></div>
       <p id="ranking-status" class="muted">Aguardando conexão…</p>
       <ol id="ranking-list" class="ranking-list"></ol>
+      <div class="section-title"><div><p class="eyebrow">PROFESSORES E FUNCIONÁRIOS</p><h2>Avaliações da equipe</h2></div></div>
+      <p class="muted">Média de 1 a 5 em relação com o tema, criatividade e apresentação. Estas notas são independentes dos votos.</p>
+      <ol id="ratings-list" class="ranking-list"></ol>
       <details class="qr-panel"><summary>QR code para votar</summary><div id="qr"></div><p id="vote-url"></p><div class="toolbar-buttons"><a id="download-qr" class="secondary link-button" download="amefricanidades-qr.gif">Baixar QR code</a><a class="secondary link-button" href="cartaz-votacao.pdf" target="_blank" rel="noopener">Cartaz para imprimir</a></div></details>
     </section>
     <section id="professora" class="view" hidden>
@@ -74,5 +78,6 @@
   <footer><strong>AMEFRICANIDADES</strong><span>Arte · História · Resistência</span></footer>
   <dialog id="vote-dialog"><form method="dialog"><button class="dialog-close" aria-label="Fechar">×</button></form><p class="eyebrow">SUAS ESCOLHAS</p><h2>Confirmar meu voto</h2><p id="confirm-identity"></p><ul id="confirm-masks"></ul><p>Depois de confirmar, suas escolhas não poderão ser alteradas.</p><button id="submit-vote" class="primary">Enviar voto</button><p id="submit-status" role="status"></p></dialog>
   <dialog id="art-dialog"><form method="dialog"><button class="dialog-close" aria-label="Fechar">×</button></form><img id="art-photo" alt=""><p id="art-number" class="eyebrow"></p><h2 id="art-title"></h2><p id="art-authors" class="muted"></p><p id="art-text" class="art-text"></p></dialog>
+  <dialog id="rating-dialog"><form method="dialog"><button class="dialog-close" aria-label="Fechar">×</button></form><p class="eyebrow">AVALIAÇÃO DA EQUIPE</p><h2 id="rating-title">Avaliar máscara</h2><p id="rating-identity" class="muted"></p><form id="rating-form" class="rating-form"><label>Relação com o tema Amefricanidades<select id="score-theme" required></select></label><label>Criatividade<select id="score-creativity" required></select></label><label>Apresentação da obra<select id="score-presentation" required></select></label><label>Comentário <span class="optional">(opcional)</span><textarea id="rating-comment" rows="3" maxlength="1000" placeholder="O que você destaca na obra?"></textarea></label><button id="save-rating" class="primary" type="submit">Salvar avaliação</button><p id="rating-status" role="status" class="muted"></p></form></dialog>
 </body>
 </html>

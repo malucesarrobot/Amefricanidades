@@ -2,6 +2,14 @@ const {test}=require('node:test');
 const assert=require('node:assert/strict');
 const core=require('./core.js');
 const masks={a:{number:1,active:true},b:{number:2,active:true},c:{number:3,active:true},d:{number:4,active:true}};
+test('nome da equipe consolida diferenças de caixa, espaços e acentos',()=>{
+ assert.equal(core.staffNameKey('  MáRia   Silva '),core.staffNameKey('maria silva'));
+});
+test('avaliações usam média de três critérios e ignoram notas inválidas',()=>{
+ const r=core.ratingSummary(masks,{a:{one:{theme:5,creativity:4,presentation:3},two:{theme:3,creativity:4,presentation:5},bad:{theme:6,creativity:1,presentation:1}},b:{one:{theme:5,creativity:5,presentation:5}}});
+ assert.equal(r[0].id,'b');assert.equal(r[0].average,5);
+ const a=r.find(x=>x.id==='a');assert.equal(a.count,2);assert.equal(a.average,4);
+});
 test('CSV preserva texto e neutraliza fórmulas de planilha',()=>{
   assert.equal(core.csvCell('=1+1'),'"\'=1+1"');
   assert.equal(core.csvCell(' @SUM(1)'),'"\' @SUM(1)"');

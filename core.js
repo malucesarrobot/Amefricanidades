@@ -28,6 +28,16 @@
     if (/^[\s\uFEFF]*[=+\-@]/.test(text)) text = "'" + text;
     return '"' + text.replace(/"/g,'""') + '"';
   }
+  function staffNameKey(value) {
+    return String(value || '').trim().normalize('NFD').replace(/[\u0300-\u036f]/g,'').toUpperCase().replace(/\s+/g,' ');
+  }
+  function ratingSummary(masks, reviews) {
+    return Object.entries(masks).filter(([,m])=>m.active!==false).map(([id,m])=>{
+      const scores=Object.values(reviews?.[id]||{}).filter(r=>['theme','creativity','presentation'].every(k=>Number.isInteger(r[k])&&r[k]>=1&&r[k]<=5));
+      const mean=k=>scores.length?scores.reduce((s,r)=>s+r[k],0)/scores.length:0;
+      return {id,...m,count:scores.length,theme:mean('theme'),creativity:mean('creativity'),presentation:mean('presentation'),average:scores.length?(mean('theme')+mean('creativity')+mean('presentation'))/3:0};
+    }).sort((a,b)=>b.average-a.average||Number(a.number)-Number(b.number));
+  }
   function pickRoster(source, allowed) {
     const result = {};
     const candidates = [];
@@ -59,7 +69,7 @@
     }
     return result;
   }
-  const api = {normalizeClass, validChoices, ranking, pickRoster, csvCell};
+  const api = {normalizeClass, validChoices, ranking, pickRoster, csvCell, staffNameKey, ratingSummary};
   if (typeof module !== 'undefined' && module.exports) module.exports = api;
   else root.ContestCore = api;
 })(typeof globalThis === 'object' ? globalThis : this);

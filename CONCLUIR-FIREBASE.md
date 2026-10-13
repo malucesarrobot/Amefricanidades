@@ -90,3 +90,9 @@ Esses resultados conferem as regras isoladas. A integração com as regras atuai
 ## QR code preservado
 
 Por instrução da usuária, o QR code original e o cartaz continuam exatamente iguais. Seu destino permanece https://malucesarrobot.github.io/IURIS-/amefricanidades/#votar. `config.js` fixa esse endereço. Depois de ativar e verificar o novo GitHub Pages, configurar a página antiga para encaminhar ao novo site, preservando o QR impresso. Não redirecionar antes de confirmar que o novo endereço funciona.
+
+## Atualização: equipe votante e avaliadora
+
+O site inclui a turma Professor/Funcionário e campo de nome livre. Novos ramos do concurso: `staff` (cadastros da equipe) e `reviews` (avaliações por máscara). O arquivo `database.rules.integrated.json` contém a versão completa integrada às regras fornecidas pela usuária; publicar essa versão no mesmo Realtime Database para liberar o recurso. Não modificar as permissões de outros aplicativos.
+
+A votação dos profissionais participa do ranking popular com o mesmo peso. As avaliações, com três critérios de 1 a 5 e comentário opcional, têm uma apuração separada. Elas abrem e fecham junto com a votação. Identificação por nome é autodeclarada e não comprova identidade ou vínculo profissional.
