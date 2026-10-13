@@ -43,5 +43,5 @@ test('as regras bloqueiam alterações e exclusões de votos e rejeitam campos e
   assert.ok(r.ballots.$student['.write'].includes('newData.exists()'));
   assert.equal(r.ballots.$student.$other['.validate'],false);
   assert.equal(r.roster.$student.$other['.validate'],false);
-  assert.ok(r.catalog['.write'].includes('email_verified'));
+  assert.ok(r.catalog.$mask['.write'].includes('email_verified'));
 });

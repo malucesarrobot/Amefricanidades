@@ -70,3 +70,11 @@ Para ativar essa função, atualize as regras com `database.rules.integrated.jso
 ## Bloqueio por conta Google
 
 Todas as votações e avaliações exigem uma conta Google com e-mail verificado. Os registros `ballots` e `accounts` são escritos juntos e têm validação cruzada no banco. O cliente não grava senha nem token em arquivos do repositório. A regra de um nome da chamada por envio permanece. Pessoas com várias contas e nomes diferentes ainda podem se passar por outras; sem e-mails previamente vinculados, não há comprovação da identidade civil ou escolar. O acesso anônimo não recebe permissão para votar ou avaliar. Votos anteriores são preservados.
+
+## Excluir e recuperar máscaras
+
+Somente a conta Google verificada `malu.cesar@gmail.com` recebe os botões Excluir e Recuperar. A exclusão retira a obra da galeria e das listas de resultados, mas guarda seus dados para recuperação. A tela bloqueia o comando durante votação aberta ou quando a obra tem votos ou avaliações. A regra do banco permite alterar o ramo `archives` somente à conta de Malu, com votação fechada, e impede exclusão de obras com avaliações. A remoção física de registros do catálogo é recusada para todas as contas, mantendo a edição para as duas contas já autorizadas. Como as cédulas são organizadas por votante, a conferência de votos antes da exclusão ocorre no painel; a conta administradora continua responsável por não contornar essa conferência por ferramentas externas.
+
+Atualize o Firebase com a versão atual de `database.rules.integrated.json` para ativar as permissões do comando.
+
+No cadastro, **Tirar foto** solicita captura de imagem com preferência pela câmera traseira em celulares compatíveis. **Escolher da galeria** mantém a seleção de arquivos. Ambas usam a mesma preparação e prévia da foto. O seletor e as permissões dependem do navegador.

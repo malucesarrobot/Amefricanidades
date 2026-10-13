@@ -101,3 +101,7 @@ A votação dos profissionais participa do ranking popular com o mesmo peso. As 
 ## Atualização: Google obrigatório e votação única
 
 A versão atual exige Google com e-mail verificado. Atualizar as regras com a versão atual de `database.rules.integrated.json`. O novo ramo `accounts/{uid}` impede um segundo envio pela mesma conta; `ballots/{cadastro}` impede repetição pelo mesmo nome da chamada. A gravação dos dois é atômica, com validação cruzada. A equipe usa `staff_{uid}` para cadastro e avaliações por conta. Não remover votos anteriores nem apagar dados. Manter o provedor Google habilitado; outros provedores de aplicativos existentes não precisam ser alterados.
+
+## Atualização: exclusão exclusiva de Malu
+
+`archives/{mascara}` marca a retirada recuperável da galeria. Apenas `malu.cesar@gmail.com`, com login Google verificado, pode excluir e recuperar pelo painel. O catálogo não aceita remoção física. O painel bloqueia exclusão durante votação aberta e para obras com votos ou avaliações; as regras protegem a identidade autorizada e também impedem exclusão de obras com avaliações. Para aplicar, publicar a versão atual de `database.rules.integrated.json`, preservando os outros ramos.
