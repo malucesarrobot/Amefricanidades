@@ -8,7 +8,7 @@ window.CONTEST_CONFIG = Object.freeze({
     appId: '1:824991056615:web:3cd321e321f1a5c91dd842'
   },
   root: 'amefricanidades_2026',
-  admins: ['prof.malufc@gmail.com', 'malu.cesar@gmail.com'],
+  admins: ['malu.cesar@gmail.com'],
   classes: ['1ªA', '1ªB', '2ªA', '2ªB', '3ªA', '3ªB', '3ªC'],
   sourceRoot: 'leciona/planejamento_gradebook/2026b4',
   voteUrl: 'https://malucesarrobot.github.io/IURIS-/amefricanidades/#votar'

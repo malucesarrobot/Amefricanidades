@@ -40,12 +40,12 @@
           "$other": {
             ".validate": false
           },
-          ".write": "auth != null && auth.token.email_verified === true && (auth.token.email === 'prof.malufc@gmail.com' || auth.token.email === 'malu.cesar@gmail.com') && newData.exists()"
+          ".write": "auth != null && auth.token.email_verified === true && (auth.token.email === 'malu.cesar@gmail.com') && newData.exists()"
         }
       },
       "roster": {
         ".read": "auth != null && auth.token.firebase.sign_in_provider === 'google.com' && auth.token.email_verified === true",
-        ".write": "auth != null && auth.token.email_verified === true && (auth.token.email === 'prof.malufc@gmail.com' || auth.token.email === 'malu.cesar@gmail.com')",
+        ".write": "auth != null && auth.token.email_verified === true && (auth.token.email === 'malu.cesar@gmail.com')",
         "$student": {
           ".validate": "newData.hasChildren(['name','className'])",
           "name": {
@@ -61,7 +61,7 @@
       },
       "settings": {
         ".read": true,
-        ".write": "auth != null && auth.token.email_verified === true && (auth.token.email === 'prof.malufc@gmail.com' || auth.token.email === 'malu.cesar@gmail.com')",
+        ".write": "auth != null && auth.token.email_verified === true && (auth.token.email === 'malu.cesar@gmail.com')",
         "open": {
           ".validate": "newData.isBoolean()"
         },
@@ -155,7 +155,7 @@
       },
       "accounts": {
         "$account": {
-          ".read": "auth != null && (auth.uid === $account || auth.token.email === 'malu.cesar@gmail.com' || auth.token.email === 'prof.malufc@gmail.com')",
+          ".read": "auth != null && (auth.uid === $account || auth.token.email === 'malu.cesar@gmail.com')",
           ".write": "auth != null && auth.token.firebase.sign_in_provider === 'google.com' && auth.token.email_verified === true && auth.uid === $account && !data.exists() && newData.exists()",
           ".validate": "newData.isString() && newData.parent().parent().child('ballots').child(newData.val()).child('uid').val() === auth.uid"
         }
