@@ -78,3 +78,5 @@ Somente a conta Google verificada `malu.cesar@gmail.com` recebe os botões Exclu
 Atualize o Firebase com a versão atual de `database.rules.integrated.json` para ativar as permissões do comando.
 
 No cadastro, **Tirar foto** solicita captura de imagem com preferência pela câmera traseira em celulares compatíveis. **Escolher da galeria** mantém a seleção de arquivos. Ambas usam a mesma preparação e prévia da foto. O seletor e as permissões dependem do navegador.
+
+Leitura de texto: câmera ou imagem separada da foto da máscara. Tesseract.js 5.1.1 é carregado sob demanda por CDN; reconhecimento em português ocorre no aparelho, sem API paga. Exige internet para carregar motor e idioma. A transcrição tem revisão e confirmação antes de substituir a apresentação; não salva automaticamente. Manuscritos podem ter baixa precisão.
