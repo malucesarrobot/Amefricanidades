@@ -28,7 +28,7 @@ O Firebase antigo do Iuris é **iuris-f02dc** e utiliza Firestore. Não basta tr
 ## Ações no Firebase
 
 1. Abra o projeto **leciona-eaa56** com a conta administrativa.
-2. Em Authentication, confira os provedores Google e Anonymous. A votação utiliza acesso anônimo automático; somente a professora precisa entrar com Google. Não altere provedores já usados por outros aplicativos.
+2. Em Authentication, confira o provedor Google. Todas as pessoas que votam ou avaliam precisam entrar com Google. Não altere provedores já usados por outros aplicativos.
 3. Confira se `malucesarrobot.github.io` está nos domínios autorizados. Autorize-o se estiver ausente.
 4. Leia e guarde uma cópia das regras atuais do Realtime Database.
 5. Adicione a propriedade `amefricanidades_2026` de `database.rules.fragment.json` dentro do objeto `rules`, preservando todos os demais ramos. Não use o arquivo `database.rules.test.json` para substituir regras de um projeto existente.
@@ -96,3 +96,8 @@ Por instrução da usuária, o QR code original e o cartaz continuam exatamente 
 O site inclui a turma Professor/Funcionário e campo de nome livre. Novos ramos do concurso: `staff` (cadastros da equipe) e `reviews` (avaliações por máscara). O arquivo `database.rules.integrated.json` contém a versão completa integrada às regras fornecidas pela usuária; publicar essa versão no mesmo Realtime Database para liberar o recurso. Não modificar as permissões de outros aplicativos.
 
 A votação dos profissionais participa do ranking popular com o mesmo peso. As avaliações, com três critérios de 1 a 5 e comentário opcional, têm uma apuração separada. Elas abrem e fecham junto com a votação. Identificação por nome é autodeclarada e não comprova identidade ou vínculo profissional.
+
+
+## Atualização: Google obrigatório e votação única
+
+A versão atual exige Google com e-mail verificado. Atualizar as regras com a versão atual de `database.rules.integrated.json`. O novo ramo `accounts/{uid}` impede um segundo envio pela mesma conta; `ballots/{cadastro}` impede repetição pelo mesmo nome da chamada. A gravação dos dois é atômica, com validação cruzada. A equipe usa `staff_{uid}` para cadastro e avaliações por conta. Não remover votos anteriores nem apagar dados. Manter o provedor Google habilitado; outros provedores de aplicativos existentes não precisam ser alterados.

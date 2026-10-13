@@ -39,7 +39,9 @@
         <figure class="poster"><img src="cartaz.jpg" alt="Cartaz do concurso de máscaras Amefricanidades: Arte, História e Resistência. Participação do Ensino Médio, individual ou em dupla; entrega até 14 de outubro."></figure>
       </div>
       <div class="section-title" id="identificacao"><div><p class="eyebrow">01 · IDENTIFIQUE-SE</p><h2>Antes de escolher</h2></div><span id="connection" class="status-pill">Conectando…</span></div>
-      <div class="identity panel">
+      <div id="voter-login" class="panel login-panel"><h2>Entre para votar</h2><p>Use sua conta Google. Cada conta pode enviar uma única votação, com três máscaras.</p><button id="voter-google" class="primary">Entrar com Google</button><p id="voter-login-status" class="muted" role="status"></p></div>
+      <div id="voter-account" class="account-panel" hidden><span id="voter-account-label"></span><button id="voter-logout" class="secondary">Sair</button></div>
+      <div id="voter-identity" class="identity panel" hidden>
         <label>Turma<select id="voter-class"><option value="">Selecione sua turma</option></select></label>
         <label id="student-name-field">Seu nome<select id="voter-name" disabled><option value="">Selecione a turma primeiro</option></select></label>
         <label id="staff-name-field" hidden>Seu nome completo<input id="staff-name" maxlength="150" autocomplete="name" placeholder="Escreva seu nome"></label>

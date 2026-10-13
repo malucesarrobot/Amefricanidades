@@ -1,10 +1,10 @@
 # Amefricanidades — concurso de máscaras
 
-Site estático para GitHub Pages, com Firebase Realtime Database e Google Authentication para a professora. A configuração inicial utiliza o Firebase do Leciona, em um ramo próprio chamado `amefricanidades_2026`. Não há alteração dos dados do Planejamento ou do Leciona.
+Site estático para GitHub Pages, com Firebase Realtime Database e Google Authentication para votantes e professora. A configuração inicial utiliza o Firebase do Leciona, em um ramo próprio chamado `amefricanidades_2026`. Não há alteração dos dados do Planejamento ou do Leciona.
 
 ## Fluxo dos estudantes
 
-Turma → nome na chamada → três máscaras diferentes → confirmação. Cada máscara escolhida recebe um voto. A identificação não exige senha ou código. O acesso anônimo do Firebase ocorre automaticamente, sem tela de login para estudantes.
+Turma → nome na chamada → três máscaras diferentes → confirmação. Cada máscara escolhida recebe um voto. O votante entra com sua conta Google, seleciona a turma e o nome e confirma três máscaras. Um registro por UID Google e um registro por nome da chamada são gravados atomicamente: a mesma conta não pode votar com outro nome, e outra conta não pode repetir o mesmo nome.
 
 O voto só aparece como confirmado após o banco aceitar a gravação. Repetições do mesmo estudante são bloqueadas pelas regras do banco, inclusive em celulares diferentes. A escolha pelo nome não comprova a identidade: alguém pode selecionar outro estudante. Este é um limite deliberado do fluxo simples solicitado.
 
@@ -23,7 +23,7 @@ Máscaras com votos não podem ser ocultadas pelo painel. O ranking preserva emp
 ## Configuração administrativa pendente
 
 1. O código está preparado no repositório `malucesarrobot/Amefricanidades`, branch `main`, pasta raiz: https://malucesarrobot.github.io/Amefricanidades/. O repositório Iuris original permanece separado. Ative o GitHub Pages na branch main, pasta raiz.
-2. Em Firebase Authentication, autorizar o domínio do GitHub Pages e conferir os provedores Google e Anonymous. Evitar alterações em provedores já utilizados pelos outros aplicativos.
+2. Em Firebase Authentication, autorizar o domínio do GitHub Pages e conferir o provedor Google. Evitar alterações em provedores já utilizados pelos outros aplicativos.
 3. Ler as regras existentes do Realtime Database e adicionar somente a propriedade de `database.rules.fragment.json` dentro de `rules`. Preservar todos os demais ramos. O arquivo `database.rules.test.json` é exclusivamente para um projeto vazio/emulador: NÃO substitui as regras atuais do Leciona.
 4. Verificar se algum `.read` ou `.write` do projeto existente em um ancestral concede permissões mais amplas, pois regras de filhos não revogam concessões em ancestrais. Não publicar sem conferir esse ponto.
 5. Conferir o login, importar as chamadas atuais, cadastrar a primeira máscara e testar voto repetido e atualização entre dois dispositivos. A votação deve permanecer fechada até a conferência.
@@ -60,8 +60,13 @@ Por instrução da usuária, o QR code original e o cartaz continuam exatamente 
 
 ## Professores e funcionários
 
-A opção **Professor/Funcionário** aparece na identificação dos votantes. O nome é digitado livremente, e a pessoa pode escolher três máscaras com o mesmo peso dos votos dos estudantes. A participação repetida com o mesmo nome normalizado usa o mesmo cadastro. A identificação é autodeclarada e não comprova vínculo com a escola.
+A opção **Professor/Funcionário** aparece na identificação dos votantes. O nome é digitado livremente, e a pessoa pode escolher três máscaras com o mesmo peso dos votos dos estudantes. O cadastro da equipe e suas avaliações são vinculados à conta Google. A identificação é autodeclarada e não comprova vínculo com a escola.
 
-A equipe também pode avaliar cada máscara com notas inteiras de 1 a 5 em relação com o tema, criatividade e apresentação, além de comentário opcional. As médias são exibidas em uma seção separada do ranking de votos. Cada nome tem uma avaliação por máscara; a revisão é permitida no mesmo acesso enquanto a votação estiver aberta. Outro acesso não pode sobrescrever a avaliação existente.
+A equipe também pode avaliar cada máscara com notas inteiras de 1 a 5 em relação com o tema, criatividade e apresentação, além de comentário opcional. As médias são exibidas em uma seção separada do ranking de votos. Cada conta Google tem uma avaliação por máscara; a revisão é permitida pela mesma conta, inclusive em outro aparelho, enquanto a votação estiver aberta. Outra conta não pode sobrescrever a avaliação existente.
 
 Para ativar essa função, atualize as regras com `database.rules.integrated.json`, que preserva os ramos leciona e relCfg conforme as regras fornecidas em 13/10/2026. Se houve alterações posteriores no console, integre o fragmento atual sem substituir esses outros ramos. A atualização de código não publica regras no Firebase automaticamente.
+
+
+## Bloqueio por conta Google
+
+Todas as votações e avaliações exigem uma conta Google com e-mail verificado. Os registros `ballots` e `accounts` são escritos juntos e têm validação cruzada no banco. O cliente não grava senha nem token em arquivos do repositório. A regra de um nome da chamada por envio permanece. Pessoas com várias contas e nomes diferentes ainda podem se passar por outras; sem e-mails previamente vinculados, não há comprovação da identidade civil ou escolar. O acesso anônimo não recebe permissão para votar ou avaliar. Votos anteriores são preservados.

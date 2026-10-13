@@ -52,7 +52,7 @@
         }
       },
       "roster": {
-        ".read": "auth != null",
+        ".read": "auth != null && auth.token.firebase.sign_in_provider === 'google.com' && auth.token.email_verified === true",
         ".write": "auth != null && auth.token.email_verified === true && (auth.token.email === 'prof.malufc@gmail.com' || auth.token.email === 'malu.cesar@gmail.com')",
         "$student": {
           ".validate": "newData.hasChildren(['name','className'])",
@@ -81,10 +81,10 @@
         }
       },
       "ballots": {
-        ".read": "auth != null",
+        ".read": "auth != null && auth.token.firebase.sign_in_provider === 'google.com' && auth.token.email_verified === true",
         "$student": {
-          ".write": "auth != null && !data.exists() && newData.exists() && root.child('amefricanidades_2026').child('settings/open').val() === true && (root.child('amefricanidades_2026').child('roster').child($student).exists() || root.child('amefricanidades_2026').child('staff').child($student).exists())",
-          ".validate": "newData.hasChildren(['first','second','third','at']) && newData.child('first').isString() && root.child('amefricanidades_2026').child('catalog').child(newData.child('first').val()).child('active').val() === true && newData.child('second').isString() && root.child('amefricanidades_2026').child('catalog').child(newData.child('second').val()).child('active').val() === true && newData.child('third').isString() && root.child('amefricanidades_2026').child('catalog').child(newData.child('third').val()).child('active').val() === true && newData.child('first').val() !== newData.child('second').val() && newData.child('first').val() !== newData.child('third').val() && newData.child('second').val() !== newData.child('third').val()",
+          ".write": "auth != null && auth.token.firebase.sign_in_provider === 'google.com' && auth.token.email_verified === true && !data.exists() && newData.exists() && root.child('amefricanidades_2026/settings/open').val() === true && (root.child('amefricanidades_2026/roster').child($student).exists() || (root.child('amefricanidades_2026/staff').child($student).child('uid').val() === auth.uid))",
+          ".validate": "newData.hasChildren(['first','second','third','at']) && newData.child('first').isString() && root.child('amefricanidades_2026').child('catalog').child(newData.child('first').val()).child('active').val() === true && newData.child('second').isString() && root.child('amefricanidades_2026').child('catalog').child(newData.child('second').val()).child('active').val() === true && newData.child('third').isString() && root.child('amefricanidades_2026').child('catalog').child(newData.child('third').val()).child('active').val() === true && newData.child('first').val() !== newData.child('second').val() && newData.child('first').val() !== newData.child('third').val() && newData.child('second').val() !== newData.child('third').val() && newData.hasChild('uid') && newData.parent().parent().child('accounts').child(auth.uid).val() === $student",
           "first": {
             ".validate": "newData.isString()"
           },
@@ -99,6 +99,9 @@
           },
           "$other": {
             ".validate": false
+          },
+          "uid": {
+            ".validate": "newData.isString() && newData.val() === auth.uid"
           }
         }
       },
@@ -107,10 +110,10 @@
         ".write": false
       },
       "staff": {
-        ".read": "auth != null",
+        ".read": "auth != null && auth.token.firebase.sign_in_provider === 'google.com' && auth.token.email_verified === true",
         "$person": {
-          ".write": "auth != null && !data.exists() && newData.exists()",
-          ".validate": "newData.hasChildren(['name','className','at'])",
+          ".write": "auth != null && auth.token.firebase.sign_in_provider === 'google.com' && auth.token.email_verified === true && $person === 'staff_' + auth.uid && !data.exists() && newData.exists()",
+          ".validate": "newData.hasChildren(['name','className','uid','at'])",
           "name": {
             ".validate": "newData.isString() && newData.val().length >= 3 && newData.val().length <= 150"
           },
@@ -122,14 +125,17 @@
           },
           "$other": {
             ".validate": false
+          },
+          "uid": {
+            ".validate": "newData.isString() && newData.val() === auth.uid"
           }
         }
       },
       "reviews": {
-        ".read": "auth != null",
+        ".read": "auth != null && auth.token.firebase.sign_in_provider === 'google.com' && auth.token.email_verified === true",
         "$mask": {
           "$person": {
-            ".write": "auth != null && newData.exists() && root.child('amefricanidades_2026').child('settings/open').val() === true && root.child('amefricanidades_2026').child('catalog').child($mask).child('active').val() === true && root.child('amefricanidades_2026').child('staff').child($person).exists() && (!data.exists() || data.child('uid').val() === auth.uid)",
+            ".write": "auth != null && auth.token.firebase.sign_in_provider === 'google.com' && auth.token.email_verified === true && $person === 'staff_' + auth.uid && newData.exists() && root.child('amefricanidades_2026').child('settings/open').val() === true && root.child('amefricanidades_2026').child('catalog').child($mask).child('active').val() === true && root.child('amefricanidades_2026').child('staff').child($person).exists() && (!data.exists() || data.child('uid').val() === auth.uid)",
             ".validate": "newData.hasChildren(['theme','creativity','presentation','comment','uid','at'])",
             "theme": {
               ".validate": "newData.isNumber() && newData.val() >= 1 && newData.val() <= 5 && newData.val() % 1 === 0"
@@ -153,6 +159,13 @@
               ".validate": false
             }
           }
+        }
+      },
+      "accounts": {
+        "$account": {
+          ".read": "auth != null && (auth.uid === $account || auth.token.email === 'malu.cesar@gmail.com' || auth.token.email === 'prof.malufc@gmail.com')",
+          ".write": "auth != null && auth.token.firebase.sign_in_provider === 'google.com' && auth.token.email_verified === true && auth.uid === $account && !data.exists() && newData.exists()",
+          ".validate": "newData.isString() && newData.parent().parent().child('ballots').child(newData.val()).child('uid').val() === auth.uid"
         }
       }
     }
