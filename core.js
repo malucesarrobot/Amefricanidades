@@ -44,8 +44,10 @@
     for (const [id, student] of Object.entries(source.alunos || {})) {
       const turma = (source.turmas || {})[student.turmaId];
       if (!turma || student.ativo === false || !String(student.nome || '').trim()) continue;
+      const labels=[turma.nome,turma.name,turma.turma,turma.label].filter(Boolean);
+      if(Number(turma.serie)===9 || labels.some(v=>/(?:^|[^0-9])9\s*[ºª°]?(?:\s*(?:ANO|[A-Z])|$)/i.test(String(v)))) continue;
       const explicit = normalizeClass(String(turma.serie || '') + String(turma.letra || ''));
-      const fields = [turma.nome,turma.name,turma.turma,turma.label,turma.id,student.turmaId];
+      const fields = [turma.nome,turma.name,turma.turma,turma.label];
       let className = explicit || fields.map(normalizeClass).find(Boolean);
       if (!className) {
         for (const field of fields) {

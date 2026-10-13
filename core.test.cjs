@@ -45,3 +45,5 @@ test('as regras bloqueiam alterações e exclusões de votos e rejeitam campos e
   assert.equal(r.roster.$student.$other['.validate'],false);
   assert.ok(r.catalog.$mask['.write'].includes('email_verified'));
 });
+
+test('não deduz turma de identificadores internos nem aceita 9º com série divergente',()=>{const source={turmas:{'disc-3A':{nome:'História'},nove:{nome:'9º ano A',serie:3,letra:'A'},medio:{nome:'3ª Série A'}},alunos:{a:{nome:'Indefinido',turmaId:'disc-3A'},b:{nome:'Do nono',turmaId:'nove'},c:{nome:'Do médio',turmaId:'medio'}}};assert.deepEqual(Object.values(core.pickRoster(source,['3ªA'])),[{name:'Do médio',className:'3ªA'}]);});
