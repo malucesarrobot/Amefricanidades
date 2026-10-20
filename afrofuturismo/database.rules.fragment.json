@@ -1,0 +1,104 @@
+{
+  "afrofuturismo_2026": {
+    "roster": {
+      ".read": "auth != null && auth.token.email_verified === true && auth.token.firebase.sign_in_provider === 'google.com' && auth.token.email === 'malu.cesar@gmail.com'",
+      ".write": "auth != null && auth.token.email_verified === true && auth.token.firebase.sign_in_provider === 'google.com' && auth.token.email === 'malu.cesar@gmail.com'",
+      "$student": {
+        ".validate": "newData.hasChildren(['name','classroom'])",
+        "name": {
+          ".validate": "newData.isString() && newData.val().length > 0 && newData.val().length <= 160"
+        },
+        "classroom": {
+          ".validate": "newData.isString() && newData.val().matches(/^[89]º [A-Z]$/)"
+        },
+        "$other": {
+          ".validate": false
+        }
+      }
+    },
+    "catalog": {
+      ".read": true,
+      "$student": {
+        ".write": "auth != null && auth.token.email_verified === true && auth.token.firebase.sign_in_provider === 'google.com' && auth.token.email === 'malu.cesar@gmail.com' && now < 1794279600000",
+        ".validate": "newData.hasChildren(['number','title','caption','sources','photo','category','classroom','active']) && root.child('afrofuturismo_2026/roster').child($student).exists() && newData.child('classroom').val() === root.child('afrofuturismo_2026/roster').child($student).child('classroom').val()",
+        "number": {
+          ".validate": "newData.isNumber() && newData.val() % 1 === 0 && newData.val() >= 1 && newData.val() <= 9999 && (data.exists() ? newData.val() === data.val() : newData.val() === root.child('afrofuturismo_2026/counter').val())"
+        },
+        "title": {
+          ".validate": "newData.isString() && newData.val().length > 0 && newData.val().length <= 120"
+        },
+        "caption": {
+          ".validate": "newData.isString() && newData.val().length > 0 && newData.val().length <= 1500"
+        },
+        "sources": {
+          ".validate": "newData.isString() && newData.val().length > 0 && newData.val().length <= 1000"
+        },
+        "photo": {
+          ".validate": "newData.isString() && newData.val().beginsWith('data:image/jpeg;base64,') && newData.val().length <= 400000"
+        },
+        "category": {
+          ".validate": "newData.val() === '8' && newData.parent().child('classroom').val().beginsWith('8º ') || newData.val() === '9' && newData.parent().child('classroom').val().beginsWith('9º ')"
+        },
+        "classroom": {
+          ".validate": "newData.isString() && newData.val().matches(/^[89]º [A-Z]$/)"
+        },
+        "active": {
+          ".validate": "newData.isBoolean()"
+        },
+        "$other": {
+          ".validate": false
+        }
+      }
+    },
+    "counter": {
+      ".read": "auth != null && auth.token.email_verified === true && auth.token.firebase.sign_in_provider === 'google.com' && auth.token.email === 'malu.cesar@gmail.com'",
+      ".write": "auth != null && auth.token.email_verified === true && auth.token.firebase.sign_in_provider === 'google.com' && auth.token.email === 'malu.cesar@gmail.com' && now < 1794279600000",
+      ".validate": "newData.isNumber() && newData.val() % 1 === 0 && newData.val() >= 1 && newData.val() <= 9999 && (data.exists() ? newData.val() === data.val() + 1 : newData.val() === 1)"
+    },
+    "ballots": {
+      ".read": "auth != null && auth.token.email_verified === true && auth.token.firebase.sign_in_provider === 'google.com' && auth.token.email === 'malu.cesar@gmail.com'",
+      "$uid": {
+        ".read": "auth != null && auth.token.email_verified === true && auth.token.firebase.sign_in_provider === 'google.com' && auth.uid === $uid",
+        "$category": {
+          ".write": "auth != null && auth.token.email_verified === true && auth.token.firebase.sign_in_provider === 'google.com' && auth.uid === $uid && ($category === '8' || $category === '9') && !data.exists() && newData.exists() && now >= 1794279600000 && now < 1794798000000",
+          ".validate": "newData.hasChildren(['drawingKey','at']) && root.child('afrofuturismo_2026/catalog').child(newData.child('drawingKey').val()).child('active').val() === true && root.child('afrofuturismo_2026/catalog').child(newData.child('drawingKey').val()).child('category').val() === $category",
+          "drawingKey": {
+            ".validate": "newData.isString() && newData.val().length > 0 && newData.val().length <= 64"
+          },
+          "at": {
+            ".validate": "newData.isNumber() && newData.val() <= now && newData.val() >= now - 60000"
+          },
+          "$other": {
+            ".validate": false
+          }
+        }
+      }
+    },
+    "results": {
+      ".read": "now >= 1794970800000 || (auth != null && auth.token.email_verified === true && auth.token.firebase.sign_in_provider === 'google.com' && auth.token.email === 'malu.cesar@gmail.com')",
+      ".write": "auth != null && auth.token.email_verified === true && auth.token.firebase.sign_in_provider === 'google.com' && auth.token.email === 'malu.cesar@gmail.com' && now >= 1794970800000",
+      "$entry": {
+        ".validate": "newData.hasChildren(['id','title','category','total'])",
+        "id": {
+          ".validate": "newData.isNumber()"
+        },
+        "title": {
+          ".validate": "newData.isString() && newData.val().length > 0 && newData.val().length <= 120"
+        },
+        "category": {
+          ".validate": "newData.val() === '8' || newData.val() === '9'"
+        },
+        "total": {
+          ".validate": "newData.isNumber() && newData.val() >= 0 && newData.val() % 1 === 0"
+        },
+        "$other": {
+          ".validate": false
+        }
+      }
+    },
+    "$other": {
+      ".read": false,
+      ".write": false
+    }
+  }
+}
