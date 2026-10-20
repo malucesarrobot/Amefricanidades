@@ -1,2 +1,2 @@
-/* Ativar após aprovação do projeto e publicação das regras específicas. */
-window.AFRO_CONFIG={enabled:false,root:'afrofuturismo_2026',admin:'malu.cesar@gmail.com',firebase:{apiKey:'AIzaSyC89tYmSG7Fl0wv37doAiO2tmf7sCGX6Ps',authDomain:'leciona-eaa56.firebaseapp.com',databaseURL:'https://leciona-eaa56-default-rtdb.firebaseio.com',projectId:'leciona-eaa56',appId:'1:824991056615:web:3cd321e321f1a5c91dd842'}};
+/* Integração ativa; permissões aplicadas pelas regras do Firebase. */
+window.AFRO_CONFIG={enabled:true,root:'afrofuturismo_2026',admin:'malu.cesar@gmail.com',firebase:{apiKey:'AIzaSyC89tYmSG7Fl0wv37doAiO2tmf7sCGX6Ps',authDomain:'leciona-eaa56.firebaseapp.com',databaseURL:'https://leciona-eaa56-default-rtdb.firebaseio.com',projectId:'leciona-eaa56',appId:'1:824991056615:web:3cd321e321f1a5c91dd842'}};

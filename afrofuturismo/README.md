@@ -4,7 +4,7 @@ Site estático para GitHub Pages. Público: 8º e 9º anos. Visualização sem c
 
 ## Estado da integração
 
-A página está pronta para apresentação. A conexão Firebase está desativada em `firebase-config.js` até a aprovação do projeto de destino e publicação de suas regras. Nenhuma alteração de regras foi aplicada nesta entrega.
+A integração Firebase foi ativada em 20/10/2026. As regras específicas foram acrescentadas ao nó `afrofuturismo_2026`, preservando integralmente as regras anteriores. Google já estava habilitado e `malucesarrobot.github.io` já estava autorizado.
 
 Projeto proposto: `leciona-eaa56`, o projeto referenciado pelo Amefricanidades. Nó separado: `afrofuturismo_2026`.
 
