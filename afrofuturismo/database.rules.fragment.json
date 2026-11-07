@@ -1,8 +1,8 @@
 {
   "afrofuturismo_2026": {
     "roster": {
-      ".read": "auth != null && auth.token.email_verified === true && auth.token.firebase.sign_in_provider === 'google.com' && auth.token.email === 'malu.cesar@gmail.com'",
-      ".write": "auth != null && auth.token.email_verified === true && auth.token.firebase.sign_in_provider === 'google.com' && auth.token.email === 'malu.cesar@gmail.com'",
+      ".read": "auth != null && auth.token.email_verified === true && auth.token.firebase.sign_in_provider === 'google.com' && (auth.token.email === 'malu.cesar@gmail.com' || auth.token.email === 'prof.malufc@gmail.com' || auth.token.email === 'lizianeaparecidasilva@gmail.com')",
+      ".write": "auth != null && auth.token.email_verified === true && auth.token.firebase.sign_in_provider === 'google.com' && (auth.token.email === 'malu.cesar@gmail.com' || auth.token.email === 'prof.malufc@gmail.com' || auth.token.email === 'lizianeaparecidasilva@gmail.com')",
       "$student": {
         ".validate": "newData.hasChildren(['name','classroom'])",
         "name": {
@@ -19,7 +19,7 @@
     "catalog": {
       ".read": true,
       "$student": {
-        ".write": "auth != null && auth.token.email_verified === true && auth.token.firebase.sign_in_provider === 'google.com' && auth.token.email === 'malu.cesar@gmail.com' && now < 1794279600000",
+        ".write": "auth != null && auth.token.email_verified === true && auth.token.firebase.sign_in_provider === 'google.com' && (auth.token.email === 'malu.cesar@gmail.com' || auth.token.email === 'prof.malufc@gmail.com' || auth.token.email === 'lizianeaparecidasilva@gmail.com') && now < 1794279600000",
         ".validate": "newData.hasChildren(['number','title','caption','sources','photo','category','classroom','active']) && root.child('afrofuturismo_2026/roster').child($student).exists() && newData.child('classroom').val() === root.child('afrofuturismo_2026/roster').child($student).child('classroom').val()",
         "number": {
           ".validate": "newData.isNumber() && newData.val() % 1 === 0 && newData.val() >= 1 && newData.val() <= 9999 && (data.exists() ? newData.val() === data.val() : newData.val() === root.child('afrofuturismo_2026/counter').val())"
@@ -51,12 +51,12 @@
       }
     },
     "counter": {
-      ".read": "auth != null && auth.token.email_verified === true && auth.token.firebase.sign_in_provider === 'google.com' && auth.token.email === 'malu.cesar@gmail.com'",
-      ".write": "auth != null && auth.token.email_verified === true && auth.token.firebase.sign_in_provider === 'google.com' && auth.token.email === 'malu.cesar@gmail.com' && now < 1794279600000",
+      ".read": "auth != null && auth.token.email_verified === true && auth.token.firebase.sign_in_provider === 'google.com' && (auth.token.email === 'malu.cesar@gmail.com' || auth.token.email === 'prof.malufc@gmail.com' || auth.token.email === 'lizianeaparecidasilva@gmail.com')",
+      ".write": "auth != null && auth.token.email_verified === true && auth.token.firebase.sign_in_provider === 'google.com' && (auth.token.email === 'malu.cesar@gmail.com' || auth.token.email === 'prof.malufc@gmail.com' || auth.token.email === 'lizianeaparecidasilva@gmail.com')",
       ".validate": "newData.isNumber() && newData.val() % 1 === 0 && newData.val() >= 1 && newData.val() <= 9999 && (data.exists() ? newData.val() === data.val() + 1 : newData.val() === 1)"
     },
     "ballots": {
-      ".read": "auth != null && auth.token.email_verified === true && auth.token.firebase.sign_in_provider === 'google.com' && auth.token.email === 'malu.cesar@gmail.com'",
+      ".read": "auth != null && auth.token.email_verified === true && auth.token.firebase.sign_in_provider === 'google.com' && (auth.token.email === 'malu.cesar@gmail.com' || auth.token.email === 'prof.malufc@gmail.com' || auth.token.email === 'lizianeaparecidasilva@gmail.com')",
       "$uid": {
         ".read": "auth != null && auth.token.email_verified === true && auth.token.firebase.sign_in_provider === 'google.com' && auth.uid === $uid",
         "$category": {
@@ -75,8 +75,8 @@
       }
     },
     "results": {
-      ".read": "auth != null && auth.token.email_verified === true && auth.token.firebase.sign_in_provider === 'google.com' && auth.token.email === 'malu.cesar@gmail.com'",
-      ".write": "auth != null && auth.token.email_verified === true && auth.token.firebase.sign_in_provider === 'google.com' && auth.token.email === 'malu.cesar@gmail.com' && now >= 1794970800000",
+      ".read": "auth != null && auth.token.email_verified === true && auth.token.firebase.sign_in_provider === 'google.com' && (auth.token.email === 'malu.cesar@gmail.com' || auth.token.email === 'prof.malufc@gmail.com' || auth.token.email === 'lizianeaparecidasilva@gmail.com')",
+      ".write": "auth != null && auth.token.email_verified === true && auth.token.firebase.sign_in_provider === 'google.com' && (auth.token.email === 'malu.cesar@gmail.com' || auth.token.email === 'prof.malufc@gmail.com' || auth.token.email === 'lizianeaparecidasilva@gmail.com')",
       "$entry": {
         ".validate": "newData.hasChildren(['id','title','category','total'])",
         "id": {
@@ -101,7 +101,7 @@
       ".write": false
     },
     "public_votes": {
-      ".read": "auth != null && auth.token.email_verified === true && auth.token.firebase.sign_in_provider === 'google.com' && auth.token.email === 'malu.cesar@gmail.com'",
+      ".read": "auth != null && auth.token.email_verified === true && auth.token.firebase.sign_in_provider === 'google.com' && (auth.token.email === 'malu.cesar@gmail.com' || auth.token.email === 'prof.malufc@gmail.com' || auth.token.email === 'lizianeaparecidasilva@gmail.com')",
       "$uid": {
         "$voteId": {
           ".write": "auth != null && auth.token.email_verified === true && auth.token.firebase.sign_in_provider === 'google.com' && auth.uid === $uid && !data.exists() && newData.exists() && now >= 1794279600000 && now < 1794798000000",
@@ -116,6 +116,16 @@
             ".validate": false
           }
         }
+      }
+    },
+    "voting_control": {
+      ".read": true,
+      ".write": "auth != null && auth.token.email_verified === true && auth.token.firebase.sign_in_provider === 'google.com' && (auth.token.email === 'malu.cesar@gmail.com' || auth.token.email === 'prof.malufc@gmail.com' || auth.token.email === 'lizianeaparecidasilva@gmail.com')",
+      "open": {
+        ".validate": "newData.isBoolean()"
+      },
+      "$other": {
+        ".validate": false
       }
     }
   }
