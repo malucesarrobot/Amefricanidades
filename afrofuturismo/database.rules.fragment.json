@@ -104,7 +104,7 @@
       ".read": "auth != null && auth.token.email_verified === true && auth.token.firebase.sign_in_provider === 'google.com' && (auth.token.email === 'malu.cesar@gmail.com' || auth.token.email === 'prof.malufc@gmail.com' || auth.token.email === 'lizianeaparecidasilva@gmail.com')",
       "$uid": {
         "$voteId": {
-          ".write": "auth != null && auth.token.email_verified === true && auth.token.firebase.sign_in_provider === 'google.com' && auth.uid === $uid && !data.exists() && newData.exists() && now >= 1794279600000 && now < 1794798000000",
+          ".write": "auth != null && auth.token.email_verified === true && auth.token.firebase.sign_in_provider === 'google.com' && auth.uid === $uid && !data.exists() && newData.exists() && (root.child('afrofuturismo_2026/voting_control/open').exists() ? root.child('afrofuturismo_2026/voting_control/open').val() === true : now >= 1794279600000 && now < 1794798000000)",
           ".validate": "newData.hasChildren(['drawingKey','at']) && root.child('afrofuturismo_2026/catalog').child(newData.child('drawingKey').val()).child('active').val() === true",
           "drawingKey": {
             ".validate": "newData.isString() && newData.val().length > 0 && newData.val().length <= 64"
