@@ -25,3 +25,9 @@ Um usuário com múltiplas contas Google ainda pode votar por contas distintas; 
 ## Código-fonte
 
 Os arquivos da aplicação estão em `source`. Para reconstruir: instalar React, React DOM, lucide-react, Vite e @vitejs/plugin-react; executar `vite build`; copiar a saída para esta pasta preservando as regras. Os SDKs Firebase compat são compartilhados com a pasta `../vendor` já existente no repositório.
+
+## Votação pública de 2026
+
+Página simples para a comunidade escolar: `/afrofuturismo/votacao.html`. Exige login Google, não mostra nome ou e-mail, permite votos repetidos e não exibe resultados aos visitantes. O Firebase registra cada voto sob o UID autenticado para autenticar a gravação; essa identificação não é apresentada na página.
+
+Para ativar, acrescente o nó atualizado de `database.rules.fragment.json` às regras atuais do Realtime Database, preservando os demais nós, e publique. A regra de `public_votes` autoriza apenas criação de registros pelo próprio UID autenticado durante 10 a 15/11/2026; a leitura e a apuração ficam restritas à conta administradora. A alteração das regras do Firebase não é executada pelo deploy do GitHub Pages.
