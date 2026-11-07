@@ -16,6 +16,21 @@
 <main>
 <section class="hero"><div class="copy"><div class="eyebrow">CONCURSO CULTURAL · 8º E 9º ANOS</div><h1>Afro<br><em>futurismo</em></h1><p>Futuros negros, memória e ancestralidade. Conheça os desenhos dos estudantes e escolha quantas vezes quiser.</p><div class="info">Votação online · 10 a 15 de novembro<br>Resultado oficial na culminância · 18/11</div></div><img class="poster" src="./flyer.webp" alt="Cartaz do projeto Afrofuturismo do CEPI Marajó"></section>
 <div class="status" id="status" aria-live="polite"><div class="notice">Toque em “Votar” no desenho escolhido. O acesso Google aparece automaticamente no primeiro voto.</div></div>
+<section class="adminbox" id="adminbox" hidden>
+<div class="eyebrow">ACESSO DA ORGANIZAÇÃO</div><h2>Administração da votação</h2>
+<div class="admin-actions"><button class="vote" id="open-vote">Abrir votação</button><button class="cancel" id="close-vote">Encerrar votação</button></div>
+<p id="admin-state">Votação segue o calendário previsto.</p>
+<h3>Cadastro de desenho</h3>
+<form id="drawing-form">
+<label>Estudante<select id="student" required><option value="">Selecione</option></select></label>
+<label>Título<input id="title" maxlength="120" required></label>
+<label>Legenda<textarea id="caption" maxlength="1500" required></textarea></label>
+<label>Referências consultadas<textarea id="sources" maxlength="1000" required></textarea></label>
+<label>Imagem do desenho<input id="photo" type="file" accept="image/jpeg,image/png,image/webp" required></label>
+<button class="vote" type="submit">Cadastrar desenho</button>
+</form>
+<h3>Apuração parcial · somente administradoras</h3><div id="partial-results" class="results">Carregando…</div>
+</section>
 <section class="section"><div class="sectionhead"><div><div class="eyebrow">ESCOLHA SEU FAVORITO</div><h2>Os desenhos</h2></div><p>Toque em votar. Você pode participar novamente.</p></div><div class="filters"><button class="filter on" data-cat="all">Todos</button><button class="filter" data-cat="8">8º ano</button><button class="filter" data-cat="9">9º ano</button></div><div id="grid" class="grid"><div class="empty">Carregando os desenhos…</div></div></section>
 </main><footer class="foot">Afrofuturismo · Futuros negros, memória e ancestralidade · CEPI Marajó</footer>
 <div class="modal" id="modal"><div class="dialog"><div class="eyebrow">CONFIRMAÇÃO</div><h3 id="confirm-title">Confirmar voto</h3><img id="confirm-img" alt=""><p>Seu voto será registrado. Você poderá votar novamente depois.</p><div class="actions"><button class="vote" id="confirm">Confirmar voto</button><button class="cancel" id="cancel">Voltar</button></div></div></div>
